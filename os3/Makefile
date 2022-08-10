@@ -29,7 +29,7 @@ $(KERNEL_BIN): kernel
 
 env:
 	(rustup target list | grep "riscv64gc-unknown-none-elf (installed)") || rustup target add $(TARGET)
-	cargo install cargo-binutils --vers ~0.2
+	cargo install cargo-binutils --vers ~0.3
 	rustup component add rust-src
 	rustup component add llvm-tools-preview
 
@@ -60,3 +60,4 @@ dbg: build
 	qemu-system-riscv64 -machine virt -nographic -bios $(BOOTLOADER) -device loader,file=$(KERNEL_BIN),addr=$(KERNEL_ENTRY_PA) -s -S
 
 .PHONY: build env kernel clean run-inner
+
